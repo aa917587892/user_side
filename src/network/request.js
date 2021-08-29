@@ -18,7 +18,7 @@ export function request(config){
         return res.data
     },err =>{
        console.log(err);
-    })
+    })   
 
      return instance(config)
 }
