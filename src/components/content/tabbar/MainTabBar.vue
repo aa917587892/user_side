@@ -5,15 +5,15 @@
       <img slot="item-active-icon" src="~assets/img/tabbar/home_active.svg" alt="">
       <span slot="item-text">首页</span>
     </tab-bar-item>
-    <tab-bar-item path="/category">
+    <tab-bar-item path="/invite">
       <img slot="item-icon" src="~assets/img/tabbar/category.svg" alt="">
       <img slot="item-active-icon" src="~assets/img/tabbar/category_active.svg" alt="">
-      <span slot="item-text">分类</span>
+      <span slot="item-text">邀请有奖</span>
     </tab-bar-item>
-    <tab-bar-item path="/cart">
+    <tab-bar-item path="/order">
       <img slot="item-icon" src="~assets/img/tabbar/shopcart.svg" alt="">
       <img slot="item-active-icon" src="~assets/img/tabbar/shopcart_active.svg" alt="">
-      <span slot="item-text">购物车</span>
+      <span slot="item-text">我的订单</span>
     </tab-bar-item>
     <tab-bar-item path="/profile">
       <img slot="item-icon" src="~assets/img/tabbar/profile.svg" alt="">

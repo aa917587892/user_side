@@ -18,4 +18,7 @@ export default {
 
 <style>
 @import "assets/css/base.css";
+li{
+  list-style: none;
+}
 </style>

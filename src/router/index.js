@@ -2,27 +2,36 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 const home = () => import("views/home/home")
-const cart = () => import("views/cart/cart")
-const category = () => import("views/category/category")
+  const detail =() => import("views/home/detail")
+const order = () => import("views/order/order")   //我的订单
+const invite = () => import("views/invite/invite")   //邀请
+
+
 const profile = () => import("views/profile/profile")
+
+
 
 Vue.use(VueRouter)
 
 const routes = [
-    {
-      path:'/',
-      redirect:'/home'
+  {
+    path:'/',
+    redirect:'/home'
     
   },{
     path:'/home',
-    component:home
+    component:home,
   },
   {
-      path:'/cart',
-      component:cart
+    path:'/home/detail/:id',
+   component:detail
+  },
+  {
+      path:'/invite',
+      component:invite
   },{
-      path:'/category',
-      component:category
+      path:'/order',
+      component:order
   },
   {
     path:'/profile',
