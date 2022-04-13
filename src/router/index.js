@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 const home = () => import("views/home/home")
   const detail =() => import("views/home/detail")
 const order = () => import("views/order/order")   //我的订单
+const lineItem =() => import("views/order/lineItem")
 const invite = () => import("views/invite/invite")   //邀请
 
 
@@ -29,9 +30,14 @@ const routes = [
   {
       path:'/invite',
       component:invite
-  },{
-      path:'/order',
-      component:order
+  },
+  {
+      path:'/order/lineItem/:id',
+      component:lineItem
+  },
+  {
+    path:'/order',
+    component:order
   },
   {
     path:'/profile',

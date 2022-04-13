@@ -211,13 +211,13 @@ export default {
     padding: 0px 12px;
     flex: 1;
 }
- .el-tabs__header{
+ .home .el-tabs__header{
    margin: 0px;
  }
- li{
+ .home li{
    line-height:27px;
  }
- .el-card__header{
+  .home .el-card__header{
     padding: 10px 20px;
     background-color: rgb(248, 248, 248);
  }
