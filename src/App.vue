@@ -2,7 +2,7 @@
   <div id="app">
    
     <router-view/>
-    <MainTabBar/>
+    <MainTabBar  v-if="!$route.meta.close_shoowTab" />
   </div> 
 </template>
 <script>

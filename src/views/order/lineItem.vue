@@ -1,10 +1,10 @@
 <template>
 <div class="lineItem">
-    <navbar class="home-navbar " >
+    <navbar class="home-navbar" >
         <div slot="center">试用订单(ID:{{}})</div>
-        <div slot="left"><i class="el-icon-arrow-left" style="font-size:20px;color:white;padding-left:10px;margin-top:5px;font-weight:600"></i></div>
+        <div slot="left" @click="$router.back()" ><i class="el-icon-arrow-left" style="font-size:20px;color:white;padding-left:10px;margin-top:5px;font-weight:600"></i></div>
     </navbar>
-    <div class="flex px-2 py-1 mb-1 bg-white">
+    <div class="flex px-2 pb-1 pt-5 mb-1 bg-white">
         <div><el-image  style="width:80px; height: 80px" :src="goods.imageUrl" fit="cover" ></el-image><div class=" text-center" style="font-size:14px;">商品主图</div></div>
         <div class="ml-1" style="font-size:14px">
             <ul>
@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="bg-white">
-        <div class="px-2 py-2 border-bottom flex">
+        <div class="px-2 py-2  border-bottom flex">
             <img src="../../assets/img/common/dy_ico.jpg" width="16" height="16" alt="" srcset="">任务状态：{{goods.state}}
         </div>
         <div class="pt-1 pb-2 px-2">
@@ -24,9 +24,9 @@
              <p class="mt-1" style="font-size:14px;color:red" >商家要求:按照文字提示步骤来操作，做错白做</p> 
         </div>
     </div>
-    <div class="mt-1 bg-white pt-2 px-1">
+    <div class="mt-1 bg-white pt-2 px-1 pb-4">
           <el-timeline>
-                <el-timeline-item timestamp="领取了活动" placement="top">
+                <el-timeline-item timestamp="领取了活动" placement="top" color="#0bbd87" icon="el-icon-check" size="large" >
                 <el-card>
                    <div class="jdfs border-bottom">
                      <p>
@@ -88,7 +88,7 @@
                     </div>
                 </el-card>
                 </el-timeline-item>
-                <el-timeline-item timestamp="找到了商品" placement="top">
+                <el-timeline-item timestamp="找到了商品" placement="top" color="#0bbd87" icon="el-icon-check" size="large">
                 <el-card>
                     <div class="pb-1 border-bottom">
                         <p>打开淘宝/天猫完成付款并且填写订单信息，商家会在发货后返还支付的商品金额到您的平台账户</p>
@@ -102,7 +102,7 @@
                                 :on-remove="handleRemove">
                                <i class="el-icon-plus"></i>
                             </el-upload>
-                            <div class="" style="color:#409eff;padding:0px 20px" >付款实例截图</div>
+                            <div class="" style="color:#409eff;padding:0px 20px" @click="fk_shili_image = true" >付款实例截图</div>
                        </div>
                         <div class="flex align-center ">
                            <span>订单编号：</span>
@@ -140,7 +140,7 @@
                     </div>
                 </el-card>
                 </el-timeline-item>
-                <el-timeline-item timestamp="完成了付款" placement="top">
+                <el-timeline-item timestamp="完成了付款" placement="top" color="#0bbd87" icon="el-icon-check" size="large">
                 <el-card>
                     <div class="">
                      <p>请等待商家发货，如果商家未在<span class="text-zise">2022/4/15 14:57:20</span>之前发货，系统将会自动发货</p> 
@@ -150,7 +150,7 @@
                     </div>
                 </el-card>
                 </el-timeline-item>
-                <el-timeline-item timestamp="商家已发货" placement="top">
+                <el-timeline-item timestamp="商家已发货" placement="top" color="#0bbd87" icon="el-icon-check" size="large">
                 <el-card>
                     <div>
                         <p style="color: rgb(48, 49, 51);" class="border-bottom pb-1">
@@ -165,7 +165,7 @@
                                     :on-remove="handleRemove">
                                 <i class="el-icon-plus"></i>
                                 </el-upload>
-                                <div class="" style="color:#409eff;padding:0px 20px" >收货示例图</div>
+                                <div class="" style="color:#409eff;padding:0px 20px" @click="sh_shili_image = true" >收货示例图</div>
                         </div>
                         <div class="flex align-center justify-between pt-1 border-bottom">
                             <span>好评截图：</span>
@@ -174,7 +174,16 @@
                                     :on-remove="handleRemove">
                                 <i class="el-icon-plus"></i>
                                 </el-upload>
-                                <div class="" style="color:#409eff;padding:0px 20px" >好评示例图</div>
+                                <div class="" style="color:#409eff;padding:0px 20px" @click="hp_shili_image = true" >好评示例图</div>
+                        </div>
+                        <div class="flex align-center justify-between pt-1 border-bottom">
+                            <span>追评截图：</span>
+                            <el-upload :class="{hideShow:scjt.hideUpload}"  action="https://jsonplaceholder.typicode.com/posts/"  list-type="picture-card" :limit="scjt.limit_count"  
+                                    :on-change="handleRemove"
+                                    :on-remove="handleRemove">
+                                <i class="el-icon-plus"></i>
+                                </el-upload>
+                                <div class="" style="color:#409eff;padding:0px 20px" @click="zp_shili_image = true" >追评示例图</div>
                         </div>
                         <div class="pt-1">
                             <el-button type="primary" style="width:100%" >确认已收货</el-button>
@@ -187,30 +196,70 @@
                         </div>
                         <div>
                             <span>请在好评时输入商家指定评语: <span class="text-zise">好大一瓶啊，夏天到了买个0度的就够用了，去污能力很强，必须的好评</span> </span>
-                            <div class="pb-1"><el-button type="primary" size="small" >一键复制</el-button> </div>
-                            <el-image style="width: 100px;height: 100px;margin-left:20px" v-for="(item,index) in timeLine2.zdsp.pay_image" :key="index" fit="cover"  :src="item" :preview-src-list="timeLine2.zdsp.pay_image"></el-image>
-                            
-
+                            <div class="pb-1"><el-button type="primary" size="mini"  >一键复制</el-button> </div>
+                            <el-image style="width:100px;height: 100px;margin-left:20px" v-for="(item,index) in timeLine2.zdsp.pay_image" :key="index" fit="cover"  :src="item" :preview-src-list="timeLine2.zdsp.pay_image"></el-image>                            
                         </div>
                         <div class="flex align-center py-1 border-bottom">
-                            <span>收费截图：</span>
+                            <span>好评截图：</span>
+                           <el-image style="width: 100px;height: 100px;margin-left:20px" v-for="(item,index) in timeLine2.zdsp.pay_image" :key="index" fit="cover"  :src="item" :preview-src-list="timeLine2.zdsp.pay_image"></el-image>
+                        </div>
+                        <div>
+                            <span>请在好评时输入商家指定追评语: <span class="text-zise">好大一瓶啊，夏天到了买个0度的就够用了，去污能力很强，必须的好评</span> </span>
+                            <div class="pb-1"><el-button type="primary" size="mini" >一键复制</el-button> </div>
+                            <el-image style="width:100px;height: 100px;margin-left:20px" v-for="(item,index) in timeLine2.zdsp.pay_image" :key="index" fit="cover"  :src="item" :preview-src-list="timeLine2.zdsp.pay_image"></el-image>                            
+                        </div>
+                        <div class="flex align-center py-1 border-bottom">
+                            <span>追评截图：</span>
                            <el-image style="width: 100px;height: 100px;margin-left:20px" v-for="(item,index) in timeLine2.zdsp.pay_image" :key="index" fit="cover"  :src="item" :preview-src-list="timeLine2.zdsp.pay_image"></el-image>
                         </div>
                     </div>
                 </el-card>
                 </el-timeline-item>
-                 <el-timeline-item timestamp="已经好评收货" placement="top">
+                 <el-timeline-item timestamp="已经好评收货" placement="top" color="#0bbd87" icon="el-icon-check" size="large">
                 <el-card>
                     <p>请等待商家确认完成，如果商家没有在<span>{{timeLine.time}}</span> 之前确认，系统将会自动完成。</p>
                 </el-card>
                 </el-timeline-item>
-                 <el-timeline-item timestamp="订单完成了" placement="top">
+                 <el-timeline-item timestamp="订单完成了" placement="top" color="#0bbd87" icon="el-icon-check" size="large">
                 <el-card>
                     <p>恭喜:活动订单已经完成，商家会发还{{timeLine.money}}金币到您的平台账户</p>
                 </el-card>
                 </el-timeline-item>
             </el-timeline>
+    </div> 
+    <el-backtop target=""></el-backtop>
+    <el-dialog title="付款示例图" :visible.sync="fk_shili_image" width="90%" >
+        <div class=" text-center">
+          <el-image  style="width:100%;height: 100%;" v-for="(item,index) in timeLine2.zdsp.pay_image" :key="index" fit="cover"  :src="item" :preview-src-list="timeLine2.zdsp.pay_image"></el-image>          
+        </div>
+    <div slot="footer" class="dialog-footer">
+        <el-button @click="fk_shili_image = false">关 闭</el-button>
     </div>
+    </el-dialog>
+    <el-dialog title="收货示例图" :visible.sync="sh_shili_image" width="90%" >
+        <div class=" text-center">
+          <el-image  style="width:100%;height: 100%;" v-for="(item,index) in timeLine2.zdsp.pay_image" :key="index" fit="cover"  :src="item" :preview-src-list="timeLine2.zdsp.pay_image"></el-image>          
+        </div>
+    <div slot="footer" class="dialog-footer">
+        <el-button @click="sh_shili_image = false">关 闭</el-button>
+    </div>
+    </el-dialog>
+    <el-dialog title="好评示例图" :visible.sync="hp_shili_image" width="90%" >
+        <div class=" text-center">
+          <el-image  style="width:100%;height: 100%;" v-for="(item,index) in timeLine2.zdsp.pay_image" :key="index" fit="cover"  :src="item" :preview-src-list="timeLine2.zdsp.pay_image"></el-image>          
+        </div>
+    <div slot="footer" class="dialog-footer">
+        <el-button @click="hp_shili_image = false">关 闭</el-button>
+    </div>
+    </el-dialog>
+    <el-dialog title="追评示例图" :visible.sync="zp_shili_image" width="90%" >
+        <div class=" text-center">
+          <el-image  style="width:100%;height: 100%;" v-for="(item,index) in timeLine2.zdsp.pay_image" :key="index" fit="cover"  :src="item" :preview-src-list="timeLine2.zdsp.pay_image"></el-image>          
+        </div>
+    <div slot="footer" class="dialog-footer">
+        <el-button @click="zp_shili_image = false">关 闭</el-button>
+    </div>
+    </el-dialog>
 </div>
 </template>
 <script>
@@ -219,6 +268,10 @@ import navbar from 'components/common/navbar/NavBar.vue'
 export default {
     data(){
         return{
+                fk_shili_image:false,
+                hp_shili_image:false,
+                sh_shili_image:false,
+                zp_shili_image:false,
                 scjt:{
                     limit_count:1,
                     Visible: false,
@@ -288,6 +341,7 @@ export default {
        this.scjt.hideUpload =fileList.length >= this.scjt.limit_count
         console.log( fileList.length + "------"+this.scjt.hideUpload);
       },
+      
     },
     components:{
         navbar
@@ -299,8 +353,12 @@ export default {
 .lineItem{
     background-color: #efefef;
 }
-.home-navbar{
+.lineItem .home-navbar{
    background-color:#409eff;
+   position: fixed;
+   left: 0;
+   right:0;
+   z-index: 999;
 }
 .text-zise{color:#ff1d85}
 .lineItem li{
